@@ -13,7 +13,7 @@ This repository include a brief description for programming beginners who want t
 - [Architecture](#Architecture)
 - [Create a user](#CreateUser)
 - [Create a user](#Execution)
-- [Transfer data](#DataTransfer)
+- [Partitions](#Partitions)
 - [Refernces](#References)
 ---
 ## <span style="color:red">Architecture
@@ -111,7 +111,7 @@ A normal exqution guarantee that when de job begien the resources are not being 
 
 [Back To The Top](#ClusterUY_Intructions)
 ## <span style="color:red">Commands  
-Check the user status:
+- Check the user status:
 ```bash
 [mvanzulli@login ~] $ squeue -u mvanzulli
 JOBID   PARTITION  NAME USER  ST  TIME   NODES  NODELIST
@@ -120,7 +120,7 @@ JOBID   PARTITION  NAME USER  ST  TIME   NODES  NODELIST
 493443  norma      mvanzulli  PD  0:00    2     node18
 493444  norma      mvanzulli  R   0:00    2     node 15 - 16
 ```
-Check a job status with the number id 22644, if the job is not currently running then the estimated initial time is shown:
+- Check a job status with the number id 22644, if the job is not currently running then the estimated initial time is shown:
 
 ```bash
 [mvanzulli@login ~] $ scontrol show job 22644
@@ -131,7 +131,7 @@ JOBID   PARTITION  NAME USER  ST  TIME   NODES  NODELIST
 493444  norma      mvanzulli  R   0:00    2     node 15 - 16
 ```
 
-The data space it is limited, only 300GB are available but if it is necessary more space it can be assigned by cluster staff support. 
+- The data space it is limited, only 300GB are available but if it is necessary more space it can be assigned by cluster staff support. 
 
 ```bash
 [mvanzulli@login ~] $ quota -gs show job 22644
@@ -145,18 +145,41 @@ filserver: /home
                               limit
 ```
 
-To copy data `scp` command is used from clsterUY to local machine and in the other way. Transfer from cluster to local:
+- To copy data `scp` command is used from clsterUY to local machine and in the other way. Transfer from cluster to local:
 
 ```bash
 scp mvanulli@cluster.uy:heatmap.pdf .
 heatmat.pdf                      100% 7699 646 Kb/s 00:04
 ```
-Sent a file to clusterUY with
+- Sent a file to clusterUY with
 ```bash
 scp  heatmap.r mvanulli@cluster.uy
 heatmat.pdf                      100% 7699 646 Kb/s 00:04
 ```
-Check the user status:
+- Check the state of the all ClusterUY nodes:
+```bash
+[mvanzulli@login ~]$ cstate -v
++---------------------------------------------+
+|                  ClusterUY                  |
++----------+-------+-----------+------+-------+
+| NODENAME | TOTAL | ALLOCATED | IDLE | OTHER |
++----------+-------+-----------+------+-------+
+|   node01 |    40 |         0 |   40 |     0 |
+|   node02 |    40 |         0 |   40 |     0 |
+|   node03 |    40 |         0 |   40 |     0 |
+|   node04 |    40 |         0 |   40 |     0 |
+|   node05 |    40 |         0 |   40 |     0 |
+|   node06 |    40 |         0 |    0 |    40 |
+|   node07 |    40 |         8 |   32 |     0 |
+```
+- Check the state of a node:
+```bash
+[mvanzulli@login ~]$ squeue -w node07
+           JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+         2351957 besteffor    PBE-r  ssastre  R   23:03:15      1 node07
+```
+
+
 
 ## <span style="color:red">Programs
 The following software are availaible to users:
@@ -170,18 +193,49 @@ The following software are availaible to users:
 
 ## <span style="color:red">ClusterSuscription
 1. To suscribe to cluster platform just fill info at [this link.](cluster.uy/registrio)
-2. Create a pair of private keys to access executing:
+2. Create a rsa pair of private keys to access executing:
 ```bash
-$ ssh-keygen -t nameKey -b 4096
+$ ssh-keygen -t rsa -b 4096 nameKey
 ```
-This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the nomber of the user login. If not is declared by defect use the user name definied in OS. 
+This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the name of the login user. If not is declared by defect use the user name definied in OS. 
+3. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
+```bash
+$ eval "$(ssh-agent -s)"
+```
+4. Add your SSH private key to the ssh-agent.
+   
+```bash
+  $ ssh-add ~/.ssh/nameKey
+```
 
-To indicate -i specific login user execute:
+5. To indicate -i specific login user execute:
 ```bash
 $ mvanzulli@cluster.uy -i ssh/nameKey
 ```
 
-Woalla you are in now!  Then a good practice is to create one bockup private keys to avoid possibles headache missing it. 
+Woalla you are in now!  Then a good practice is to create one backup private keys to avoid possibles headache of missing it in the future. 
+
+## <span style="color:red">Execute a Matlab script
+To run a matlab script it is necessary to create a bash file requesting a partition specifying all the parameters stated in [Partitions](#Partitions) section. An .bash script example to execute `staticVonMisesTruss.m` from the same folder where the file is located is:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=staticVonMisses
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4096
+#SBATCH --time=00:30:00
+#SBATCH --tmp=9G 
+#SBATCH --partition=normal
+#SBATCH --qos=normal
+
+#PATH TO MATLAB bin: /clusteruy/apps/matlab/R2018b/bin/matlab  
+#ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
+/clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
+```
+
+
+
 
 ## <span style="color:red">References
 
