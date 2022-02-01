@@ -311,13 +311,15 @@ sshfs mvanzulli@cluster.uy:/home/folderInCluster /home/localFolder
 
 If that command is executed the folders will be syncornized. 
 
-
-
+---
 
 [Back To The Top](#ClusterUY_Intructions)
 
 ---
+
 ## <span style="color:red">References
+
+---
 
 1. [Cluster-UY: Collaborative Scientific High Performance Computing in Uruguay](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
 2. [Cluster Web](https://www.cluster.uy/)
