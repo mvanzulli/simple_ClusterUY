@@ -6,14 +6,20 @@
 > a simple tutorial for executing in uruguayan compute center.
 ---
 
-This repository include a brief description for programming beginners who want to use [cluster-UY]([[^first]](https://cluster.uy/)) platform:
+This repository include a brief description for programming beginners who want to use [cluster-UY]([[^first]](https://cluster.uy/)) platform using a ubuntu linux distribution:
 
-
+---
 ## <span style="color:green">Sections
 - [Architecture](#Architecture)
 - [Create a user](#CreateUser)
-- [Create a user](#Execution)
+- [Execution](#Execution)
 - [Partitions](#Partitions)
+- [Quality of service](#QualityOfService)
+- [Commands](#Commands)
+- [Programs](#Programs)
+- [Cluster subscription](#ClusterSubscription)
+- [Execute matlab script](#ExecuteMatlabScript)
+- [Transfer data](#TransferData)
 - [Refernces](#References)
 ---
 ## <span style="color:red">Architecture
@@ -44,7 +50,7 @@ Its not so simple as simple PC, are some hardware requirements to guarantee:
         - Optimize the resources according to available hardware.
 
 SLRUM is the answer to all such problems. This program takes where input script files and create an output to order the executions efficiently. 
-
+---
 ## <span style="color:red">Executions
 Types of execution tasks:
   -  **interactive** In some development phases is necessary to execuct fast and debug or test the code, for this interactive online task interactive type is the best solution, since the SLRUM gives priority. (Usally runs shorter than 30m ) 
@@ -94,7 +100,8 @@ Or high power computing services, that are reserved by ANTEL and UTE, oportuinse
 | number of cores     | 1200        |
 | maximum times       | 5 days      |
 | max number of tasks | 40          |
-- normal: 560core max time 5 days max wwoks
+- normal: 560core max time 5 days max works
+---
 ## <span style="color:red">QualityOfService
 There are different partitions types depending on the patience that the job require.
 A normal exqution guarantee that when de job begien the resources are not being used by other user, so if the job starts then it must be done.
@@ -108,8 +115,7 @@ A normal exqution guarantee that when de job begien the resources are not being 
 | bessteffort   | 120 cores, 768 GB RAM    | normal               |
 | bigmen        | 40 cores, 512 GB RAM     | bessteffort          | SELECT THIS FOR SHORT TIME THAN normal |
 
-
-[Back To The Top](#ClusterUY_Intructions)
+---
 ## <span style="color:red">Commands  
 - Check the user status:
 ```bash
@@ -180,50 +186,53 @@ heatmat.pdf                      100% 7699 646 Kb/s 00:04
 ```
 
 
-
+---
 ## <span style="color:red">Programs
 The following software are availaible to users:
-- [ ] Octave
-- [ ] Matlab
-- [ ] R
-- [ ] Python
-- [ ] TensorFlow
-- [ ] COMSol
-- [ ] Julia
-
-## <span style="color:red">ClusterSuscription
-1. To suscribe to cluster platform just fill info at [this link.](cluster.uy/registrio)
+- Octave
+- Matlab
+- R
+- Python
+- TensorFlow
+- COMSol
+- Julia
+---
+## <span style="color:red">ClusterSubscription
+1. To subscribe to cluster platform just fill info at [this link.](cluster.uy/registrio)
 2. Create a rsa pair of private keys to access executing:
 ```bash
-$ ssh-keygen -t rsa -b 4096 nameKey
+  ssh-keygen -t rsa -b 4096 nameKey
 ```
-This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the name of the login user. If not is declared by defect use the user name definied in OS. 
+This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the name of the login user. If not is declared by defect use the user name defined in OS. 
 3. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
 ```bash
-$ eval "$(ssh-agent -s)"
+  eval "$(ssh-agent -s)"
 ```
 4. Add your SSH private key to the ssh-agent.
    
 ```bash
-  $ ssh-add ~/.ssh/nameKey
+  ssh-add ~/.ssh/nameKey
 ```
 
 5. To indicate -i specific login user execute:
 ```bash
-$ mvanzulli@cluster.uy -i ssh/nameKey
+  mvanzulli@cluster.uy -i ssh/nameKey
 ```
 
 Woalla you are in now!  Then a good practice is to create one backup private keys to avoid possibles headache of missing it in the future. 
 
+---
 ## <span style="color:red">Execute a Matlab script
-To run a matlab script it is necessary to create a bash file requesting a partition specifying all the parameters stated in [Partitions](#Partitions) section. An .bash script example to execute `staticVonMisesTruss.m` from the same folder where the file is located is:
-
+To run a matlab script it is necessary to create a bash file requesting a partition specifying all the parameters stated in [Partitions](#Partitions) section. A .bash script example to execute `staticVonMisesTruss.m` from the same folder where the file is located is:
+```bash
+vim onsasExample_staticVonMisesTruss.sh
+```
 ```bash
 #!/bin/bash
 #SBATCH --job-name=staticVonMisses
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=4096
+#SBATCH --mem=4096(I the unit is not specifyied the unit will be MB )
 #SBATCH --time=00:30:00
 #SBATCH --tmp=9G 
 #SBATCH --partition=normal
@@ -233,10 +242,82 @@ To run a matlab script it is necessary to create a bash file requesting a partit
 #ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
+If the otutput file name is not describied in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+---
+## <span style="color:red">Trasnfer data 
+Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i shloud execute
+
+```bash
+  scp File.pdf mvanzulli@cluster.uy:~/
+```
+Ths will paste the file in home  cluster directory through login node. If another folder is the file destination it ~/ it should be changed for the folder:
+```bash
+scp File.pdf mvanzulli@cluster.uy:~/ONSAS/...
+```
+
+From local PC to cluster the upload velocty is near to 2MB/s and form FING server is arround 25MB/s, so its highly recomended to copy from local to FING and then to clusterUY. 
+
+To transfer all folder ONSAS files in the other direction then execute:
+
+```bash
+scp mvanzulli@cluster.uy:~/ONSAS/* ./home/localFolder
+```
+
+Another possible trick is to connect directly with transfer node machine (located in port 10022), **to do this the private keys must be copy yo home folder located in clusteruy**, 
+
+```bash
+  scp ~/.ssh/nameKey ~/.ssh/nameKey.pub mvanzulli@cluster.uy:~/
+```
+then,
+```bash
+  scp -P 10022 File.pdf mvanzulli@cluster.uy:~/
+```
+To mount a virutal directory linked to clusterUY in linux or windows use sshfs, this option will be commented in the following section. 
+
+---
+## <span style="color:red">Syncornize Folders
+
+First login to yout client system and upgrade included packegaes: 
+
+```bash
+sudo apt upgrade && sudo apt update
+```
+Install SSHFS package is available with every Linux package manager. Use the commands specific to your distribution if you are not using Debian or Ubuntu.
+
+```bash
+sudo apt-get install sshfs
+```
+In order to mount file systems using SSHFS from a normal user account, you’ll need to add the user to the fuse group first. To do that first
+
+1. Check fuse group exists run:
+```bash
+cat /etc/group/ | grep 'fuse'
+```
+2. If the group exists execute
+```bash
+ sudo usermod -a -G fuse insertUserName
+```
+3. If the group not exists must be created by
+```bash
+ sudo groupadd fuse
+ sudo usermod -a -G fuse insertUserName
+ ```
+
+Then the gropup is created sshfs format is analogolsly to scp format, to link a folder from your local PC to the remote just execute:
+
+```bash
+sshfs mvanzulli@cluster.uy:/home/folderInCluster /home/localFolder
+```
+
+If that command is executed the folders will be syncornized. 
 
 
 
 
+[Back To The Top](#ClusterUY_Intructions)
+
+---
 ## <span style="color:red">References
 
-1. [](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
+1. [Cluster-UY: Collaborative Scientific High Performance Computing in Uruguay](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
+2. [Cluster Web](https://www.cluster.uy/)
