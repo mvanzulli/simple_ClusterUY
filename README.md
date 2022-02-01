@@ -1,5 +1,5 @@
 
-# <span style="color:orange">ClusterUY_Intructions   </span>
+# <span style="color:orange">simpleCluterUY   </span>
 
 ![Project Image](project-image-url)
 
@@ -20,19 +20,19 @@ This repository include a brief description for programming beginners who want t
 - [Cluster subscription](#ClusterSubscription)
 - [Execute matlab script](#ExecuteMatlabScript)
 - [Transfer data](#TransferData)
-- [Refernces](#References)
+- [References](#References)
 ---
 ## <span style="color:red">Architecture
 
- - The compute reosurces are open to free acess, inclung bussnes, researchers, students, and public institutions.  
-- The project has no profit propuse and its suteniable by the usears buy of liscenses or computation time. 
-- The main componentes are:
-  - internet (100MBPs) shared by many users so its higly transitated
-  - A conection with FING (1Gbps) (acces by TERO or insitute port)
-  - transfer operator: a distributor of data that comunicates each partxs
+ - The compute resources are open to free access, including business, researchers, students, and public institutions.  
+- The project has no profit propose and its sustainable by the users buy of licenses or computation time. 
+- The main component's are:
+  - internet (100MBPs) shared by many users so its highly transitioned
+  - A connection with FING (1Gbps) (access by TERO or insitute port)
+  - transfer operator: a distributor of data that communicates each parts
   - 28 Computations servers: (CPU & GPU) where jobs are executed. Each hardware server offers 2 Intel Xenon GOLD, 128 RAM, GPU Tesla 12GB, Linux CentOS 7, 300 TB. 
-  - A conection high performance network with 10GBpS
-  - Are specific nodes 9node31 for multiprocess executions (AMD Epic with 96 cores) and multiple parlallel 2-3 GPU nodes for streaming and GPUs shared memoryies tasks. 
+  - A connection high performance network with 10GBpS
+  - Are specific nodes 9node31 for multiprocessor executions (AMD Epic with 96 cores) and multiple parallel 2-3 GPU nodes for streaming and GPUs shared memories tasks. 
    
 ---
 ## <span style="color:red">CreateUser
@@ -53,8 +53,8 @@ SLRUM is the answer to all such problems. This program takes where input script 
 ---
 ## <span style="color:red">Executions
 Types of execution tasks:
-  -  **interactive** In some development phases is necessary to execuct fast and debug or test the code, for this interactive online task interactive type is the best solution, since the SLRUM gives priority. (Usally runs shorter than 30m ) 
-        - To run a itneractive job with 30 min max type:
+  -  **interactive** In some development phases is necessary to execute fast and debug or test the code, for this interactive online task interactive type is the best solution, since the SLRUM gives priority. (Usually runs shorter than 30m ) 
+        - To run a interactive job with 30 min max type:
   ```
   interactivo -g = srun --time+00:30:00 --pty bash 
   
@@ -66,9 +66,9 @@ Types of execution tasks:
 ```
 #!/bin/bash
 #SBATCH --job-name=charla
-#SBATCH --ntasks=1 (number of times that script it is going to be executed,, if three tasks are setted the paralelisim is implemented switching a local enviroment variable)
-#SBATCH --cpus-per-task=1(this is modifyed to implement paralelism)
-#SBATCH --mem=1G(there is no swap aviable if is exceded you are death)
+#SBATCH --ntasks=1 (number of times that script it is going to be executed,, if three tasks are settee the parallelism is implemented switching a local environment variable)
+#SBATCH --cpus-per-task=1(this is modified to implement parallelism)
+#SBATCH --mem=1G(there is no swap available if is exceeded you are death)
 #SBATCH --time=0:01:00(we should overestimate this time to survive maybe 1,5 factor, this only affect to wait SLRUM )
 #SBATCH --partition=normal
 #SBATCH --qos=normal(quality of service)
@@ -78,7 +78,7 @@ Types of execution tasks:
 R CMD BATCH code.r
 ```
 If the SLRUM manger finishes the job an email 
-Resuming by sbatch paramaters can be moddificated
+Resuming by sbatch parameters can be modified
 - Time (max time, initial and ending time)
 - I/O (input an output location and name file)
 - CPU (number, location, etc)
@@ -86,14 +86,14 @@ Resuming by sbatch paramaters can be moddificated
 - Partition QoS, account (number of partitions, quality of service, account)
 ## <span style="color:red">Partitions
 There are different partitions types depending on the patience that the job require.
-A normal exqution guarantee that when de job begien the resources are not being used by other user, so if the job starts then it must be done.
+A normal execution guarantee that when de job starts the resources are not being used by other user, so if the job starts then it must be done.
 | normal              | Description |
 | ------------------- | ----------- |
 | number of cores     | 560         |
 | maximum times       | 5 days      |
 | max number of tasks | 40          |
 
-Or high power computing services, that are reserved by ANTEL and UTE, oportuinse queue. A best effort job could not be finish if any ANTEL or UTE user need them, we could be killed. At this time there are specific nodes that have no traffic. 
+Or high power computing services, that are reserved by ANTEL and UTE, opportunistic queue. A best effort job could not be finish if any ANTEL or UTE user need them, we could be killed. At this time there are specific nodes that have no traffic. 
 
 | besteffort          | Description |
 | ------------------- | ----------- |
@@ -242,10 +242,10 @@ vim onsasExample_staticVonMisesTruss.sh
 #ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
-If the otutput file name is not describied in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
 ---
 ## <span style="color:red">Trasnfer data 
-Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i shloud execute
+Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
 
 ```bash
   scp File.pdf mvanzulli@cluster.uy:~/
@@ -255,7 +255,7 @@ Ths will paste the file in home  cluster directory through login node. If anothe
 scp File.pdf mvanzulli@cluster.uy:~/ONSAS/...
 ```
 
-From local PC to cluster the upload velocty is near to 2MB/s and form FING server is arround 25MB/s, so its highly recomended to copy from local to FING and then to clusterUY. 
+From local PC to cluster the upload velocity is near to 2MB/s and form FING server is around 25MB/s, so its highly recommend to copy from local to FING and then to clusterUY. 
 
 To transfer all folder ONSAS files in the other direction then execute:
 
@@ -272,22 +272,22 @@ then,
 ```bash
   scp -P 10022 File.pdf mvanzulli@cluster.uy:~/
 ```
-To mount a virutal directory linked to clusterUY in linux or windows use sshfs, this option will be commented in the following section. 
+To mount a virtual directory linked to clusterUY in linux or windows use sshfs, this option will be commented in the following section. 
 
 ---
 ## <span style="color:red">Syncornize Folders
 
-First login to yout client system and upgrade included packegaes: 
+First login to your client system and upgrade included packages: 
 
 ```bash
 sudo apt upgrade && sudo apt update
 ```
-Install SSHFS package is available with every Linux package manager. Use the commands specific to your distribution if you are not using Debian or Ubuntu.
+Install sshfs package is available with every Linux package manager. Use the commands specific to your distribution if you are not using Debian or Ubuntu.
 
 ```bash
 sudo apt-get install sshfs
 ```
-In order to mount file systems using SSHFS from a normal user account, you’ll need to add the user to the fuse group first. To do that first
+In order to mount file systems using sshfs from a normal user account, you’ll need to add the user to the fuse group first. To do that first
 
 1. Check fuse group exists run:
 ```bash
@@ -303,13 +303,13 @@ cat /etc/group/ | grep 'fuse'
  sudo usermod -a -G fuse insertUserName
  ```
 
-Then the gropup is created sshfs format is analogolsly to scp format, to link a folder from your local PC to the remote just execute:
+Then the group is created sshfs format is analogously to scp format, to link a folder from your local PC to the remote just execute:
 
 ```bash
 sshfs mvanzulli@cluster.uy:/home/folderInCluster /home/localFolder
 ```
 
-If that command is executed the folders will be syncornized. 
+If that command is executed the folders will be synchronized. 
 
 ---
 
