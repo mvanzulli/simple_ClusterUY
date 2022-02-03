@@ -201,10 +201,27 @@ The following software are availaible to users:
 1. To subscribe to cluster platform just fill info at [this link.](cluster.uy/registrio)
 2. Create a rsa pair of private keys to access executing:
 ```bash
-  ssh-keygen -t rsa -b 4096 nameKey
+  ssh-keygen -t rsa -b 2048 -C "<your_email>@fing.edu.uy"
 ```
 This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the name of the login user. If not is declared by defect use the user name defined in OS. 
-3. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
+3. Add public key to host. For such task execute 
+   ```bash
+   cat <mi_ssh.pub>
+  ```
+  and copy the content into the host page to your user keys, in gitlab fing is 
+  https://gitlab.fing.edu.uy/, then config and "SSH keys". Paste the public key content
+
+4. Create a `config` file in  `~/.ssh` and introduce:
+   ```bash
+# GitLab.com
+Host gitlab.com
+    Preferredauthentications publickey
+    User <user_name>
+    Port 22
+    IdentityFile ~/.ssh/<my_ssh_privatekey>
+  ```
+
+5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
 ```bash
   eval "$(ssh-agent -s)"
 ```
