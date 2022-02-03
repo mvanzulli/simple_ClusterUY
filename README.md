@@ -259,7 +259,9 @@ vim onsasExample_staticVonMisesTruss.sh
 #ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
-If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+
+ If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+ 
 ---
 ## <span style="color:red">Trasnfer data 
 Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
