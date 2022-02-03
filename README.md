@@ -213,12 +213,12 @@ This by default create a ssh key of 4096 bits in .ssh folder so then must be spe
 
 4. Create a `config` file in  `~/.ssh` and introduce:
    ```bash
-# GitLab.com
-Host gitlab.com
-    Preferredauthentications publickey
-    User <user_name>
-    Port 22
-    IdentityFile ~/.ssh/<my_ssh_privatekey>
+    # GitLab.com
+    Host gitlab.com
+        Preferredauthentications publickey
+        User <user_name>
+        Port 22
+        IdentityFile ~/.ssh/<my_ssh_privatekey>
   ```
 
 5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
