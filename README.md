@@ -50,6 +50,7 @@ Its not so simple as simple PC, are some hardware requirements to guarantee:
         - Optimize the resources according to available hardware.
 
 SLRUM is the answer to all such problems. This program takes where input script files and create an output to order the executions efficiently. 
+
 ---
 ## <span style="color:red">Executions
 Types of execution tasks:
