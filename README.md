@@ -220,18 +220,17 @@ This by default create a ssh key of 4096 bits in .ssh folder so then must be spe
         Port 22
         IdentityFile ~/.ssh/<my_ssh_privatekey>
   ```
-
 5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
-```bash
+
   eval "$(ssh-agent -s)"
 ```
-4. Add your SSH private key to the ssh-agent.
+6. Add your SSH private key to the ssh-agent.
    
 ```bash
   ssh-add ~/.ssh/nameKey
 ```
 
-5. To indicate -i specific login user execute:
+7. To indicate -i specific login user execute:
 ```bash
   mvanzulli@cluster.uy -i ssh/nameKey
 ```
