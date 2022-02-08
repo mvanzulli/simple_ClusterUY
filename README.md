@@ -1,7 +1,7 @@
 
-# <span style="color:orange">simpleClusterUY   </span>
+# <span style="color:orange">Simple_ClusterUY   </span>
 
-![Project Image](project-image-url)
+![cluster](https://user-images.githubusercontent.com/50339940/153043242-5765d6f7-dde3-4a52-b569-48f54487eb76.png)
 
 > a simple tutorial for executing in uruguayan compute center.
 ---
@@ -211,6 +211,7 @@ This by default create a ssh key of 4096 bits in `.ssh` folder so then must be s
 3. Add public key to host. For such task execute 
 ```bash
    cat <mi_ssh.pub>
+<<<<<<< HEAD
 ```
 and copy the content into the host page to your user keys, for clusterUY platform is [ClusterUY page for professors and UY researchers](https://www.cluster.uy/registro/investigador_udelar/) then config and "SSH keys". Paste the public key content, then:
 
@@ -222,17 +223,33 @@ Host clusteruy
   User mvanzulli
 ```
 
+=======
+  ```
+  and copy the content into the host page to your user keys, in gitlab fing is 
+  https://gitlab.fing.edu.uy/, then config and "SSH keys". Paste the public key content
+
+4. Create a `config` file in  `~/.ssh` and introduce:
+   ```bash
+    # GitLab.com
+    Host gitlab.com
+        Preferredauthentications publickey
+        User <user_name>
+        Port 22
+        IdentityFile ~/.ssh/<my_ssh_privatekey>
+    ```
+>>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
 5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
+
 ```bash
-  eval "$(ssh-agent -s)"
+ eval "$(ssh-agent -s)"
 ```
-4. Add your SSH private key to the ssh-agent.
+6. Add your SSH private key to the ssh-agent.
    
 ```bash
   ssh-add ~/.ssh/nameKey
 ```
 
-5. To indicate -i specific login user execute:
+7. To indicate -i specific login user execute:
 ```bash
   mvanzulli@cluster.uy -i ssh/nameKey
 ```
@@ -260,12 +277,18 @@ vim onsasExample_staticVonMisesTruss.sh
 #ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
+<<<<<<< HEAD
 If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
 
 If only matlab is want to be executed inside of `interactivo-g` node run:
 ```bash
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop
 ```
+=======
+
+ If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+ 
+>>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
 ---
 ## <span style="color:red">TransferData 
 Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
@@ -346,4 +369,7 @@ If that command is executed the folders will be synchronized.
 
 1. [Cluster-UY: Collaborative Scientific High Performance Computing in Uruguay](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
 2. [Cluster Web](https://www.cluster.uy/)
+<<<<<<< HEAD
 3. Cluster Support: Maximiliano Montiglio, Sebastián Valenzuela 
+=======
+>>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
