@@ -1,7 +1,7 @@
 
 # <span style="color:orange">Simple_ClusterUY   </span>
 
-![Project Image](project-image-url)
+![cluster](https://user-images.githubusercontent.com/50339940/153043242-5765d6f7-dde3-4a52-b569-48f54487eb76.png)
 
 > a simple tutorial for executing in uruguayan compute center.
 ---
