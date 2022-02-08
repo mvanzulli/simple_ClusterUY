@@ -343,7 +343,7 @@ If that command is executed the folders will be synchronized.
 
 ---
 
-[Back To The Top](#simpleClusterUY)
+[Back To The Top](#Simple_ClusterUY)
 
 ---
 
