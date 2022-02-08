@@ -209,13 +209,14 @@ The following software are availaible to users:
 This by default create a ssh key of 4096 bits in `.ssh` folder so then must be specified the name of the login user. If not is declared by defect use the user name defined in OS.
 
 3. Add public key to host. For such task execute 
+   
 ```bash
    cat <mi_ssh.pub>
-<<<<<<< HEAD
 ```
+
 and copy the content into the host page to your user keys, for clusterUY platform is [ClusterUY page for professors and UY researchers](https://www.cluster.uy/registro/investigador_udelar/) then config and "SSH keys". Paste the public key content, then:
 
-4. (Optional step) Create a `config` file in  `~/.ssh` and introduce:
+1. (Optional step) Create a `config` file in  `~/.ssh` and introduce:
   ```bash
 # Cluster uy
 Host clusteruy
@@ -223,21 +224,6 @@ Host clusteruy
   User mvanzulli
 ```
 
-=======
-  ```
-  and copy the content into the host page to your user keys, in gitlab fing is 
-  https://gitlab.fing.edu.uy/, then config and "SSH keys". Paste the public key content
-
-4. Create a `config` file in  `~/.ssh` and introduce:
-   ```bash
-    # GitLab.com
-    Host gitlab.com
-        Preferredauthentications publickey
-        User <user_name>
-        Port 22
-        IdentityFile ~/.ssh/<my_ssh_privatekey>
-    ```
->>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
 5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
 
 ```bash
@@ -277,18 +263,15 @@ vim onsasExample_staticVonMisesTruss.sh
 #ALIAS FOR MATLAB bin: alias matlab = "/clusteruy/apps/matlab/R2018b/bin/matlab"
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
-<<<<<<< HEAD
 If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
 
 If only matlab is want to be executed inside of `interactivo-g` node run:
 ```bash
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop
 ```
-=======
 
  If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
  
->>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
 ---
 ## <span style="color:red">TransferData 
 Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
@@ -339,6 +322,7 @@ In order to mount file systems using sshfs from a normal user account, you’ll 
 ```bash
 cat /etc/group/ | grep 'fuse'
 ```
+
 2. If the group exists execute
 ```bash
  sudo usermod -a -G fuse insertUserName
@@ -369,7 +353,4 @@ If that command is executed the folders will be synchronized.
 
 1. [Cluster-UY: Collaborative Scientific High Performance Computing in Uruguay](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
 2. [Cluster Web](https://www.cluster.uy/)
-<<<<<<< HEAD
 3. Cluster Support: Maximiliano Montiglio, Sebastián Valenzuela 
-=======
->>>>>>> 4577e5dfd6c81951e46e9ea669f526cacfa6da08
