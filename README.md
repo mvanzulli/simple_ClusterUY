@@ -1,5 +1,5 @@
 
-# <span style="color:orange">simpleCluterUY   </span>
+# <span style="color:orange">Simple_clusterUY   </span>
 
 ![Project Image](project-image-url)
 
