@@ -1,5 +1,5 @@
 
-# <span style="color:orange">simpleCluterUY   </span>
+# <span style="color:orange">simpleClusterUY   </span>
 
 ![Project Image](project-image-url)
 
@@ -18,8 +18,9 @@ This repository include a brief description for programming beginners who want t
 - [Commands](#Commands)
 - [Programs](#Programs)
 - [Cluster subscription](#ClusterSubscription)
-- [Execute matlab script](#ExecuteMatlabScript)
+- [Execute matlab script](#ExecuteMatlab)
 - [Transfer data](#TransferData)
+- [Synchronize folders](#SynchronizeFolders)
 - [References](#References)
 ---
 ## <span style="color:red">Architecture
@@ -239,7 +240,7 @@ Host clusteruy
 Woalla you are in now!  Then is highly recommended to create one backup private keys to avoid possibles headache of missing it in the future. 
 
 ---
-## <span style="color:red">Execute a Matlab script
+## <span style="color:red">ExecuteMatlab
 To run a matlab script it is necessary to create a bash file requesting a partition specifying all the parameters stated in [Partitions](#Partitions) section. A .bash script example to execute `staticVonMisesTruss.m` from the same folder where the file is located is:
 ```bash
 vim onsasExample_staticVonMisesTruss.sh
@@ -266,7 +267,7 @@ If only matlab is want to be executed inside of `interactivo-g` node run:
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop
 ```
 ---
-## <span style="color:red">Trasnfer data 
+## <span style="color:red">TransferData 
 Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
 
 ```bash
@@ -297,7 +298,7 @@ then,
 To mount a virtual directory linked to clusterUY in linux or windows use sshfs, this option will be commented in the following section. 
 
 ---
-## <span style="color:red">Syncornize Folders
+## <span style="color:red">SynchronizeFolders
 
 First login to your client system and upgrade included packages: 
 
@@ -335,7 +336,7 @@ If that command is executed the folders will be synchronized.
 
 ---
 
-[Back To The Top](#ClusterUY_Intructions)
+[Back To The Top](#simpleClusterUY)
 
 ---
 
@@ -345,3 +346,4 @@ If that command is executed the folders will be synchronized.
 
 1. [Cluster-UY: Collaborative Scientific High Performance Computing in Uruguay](https://link.springer.com/chapter/10.1007/978-3-030-38043-4_16Footnote).
 2. [Cluster Web](https://www.cluster.uy/)
+3. Cluster Support: Maximiliano Montiglio, Sebastián Valenzuela 
