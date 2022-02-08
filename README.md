@@ -12,9 +12,9 @@ This repository include a brief description for programming beginners who want t
 ## <span style="color:green">Sections
 - [Architecture](#Architecture)
 - [Create a user](#CreateUser)
-- [Execution](#Execution)
+- [Execution](#Executions)
 - [Partitions](#Partitions)
-- [Quality of service](#QualityOfService)
+- [Quality of service](#QualityOfServices)
 - [Commands](#Commands)
 - [Programs](#Programs)
 - [Cluster subscription](#ClusterSubscription)
@@ -50,6 +50,7 @@ Its not so simple as simple PC, are some hardware requirements to guarantee:
         - Optimize the resources according to available hardware.
 
 SLRUM is the answer to all such problems. This program takes where input script files and create an output to order the executions efficiently. 
+
 ---
 ## <span style="color:red">Executions
 Types of execution tasks:
@@ -65,7 +66,7 @@ Types of execution tasks:
 
 ```
 #!/bin/bash
-#SBATCH --job-name=charla
+#SBATCH --job-name=clusterSimpleExample
 #SBATCH --ntasks=1 (number of times that script it is going to be executed,, if three tasks are settee the parallelism is implemented switching a local environment variable)
 #SBATCH --cpus-per-task=1(this is modified to implement parallelism)
 #SBATCH --mem=1G(there is no swap available if is exceeded you are death)
@@ -102,7 +103,7 @@ Or high power computing services, that are reserved by ANTEL and UTE, opportunis
 | max number of tasks | 40          |
 - normal: 560core max time 5 days max works
 ---
-## <span style="color:red">QualityOfService
+## <span style="color:red">QualityOfServices
 There are different partitions types depending on the patience that the job require.
 A normal exqution guarantee that when de job begien the resources are not being used by other user, so if the job starts then it must be done.
 | normal        | Description              | Partition comptaible | comment                                |
@@ -199,27 +200,26 @@ The following software are availaible to users:
 ---
 ## <span style="color:red">ClusterSubscription
 1. To subscribe to cluster platform just fill info at [this link.](cluster.uy/registrio)
+   
 2. Create a rsa pair of private keys to access executing:
 ```bash
   ssh-keygen -t rsa -b 2048 -C "<your_email>@fing.edu.uy"
 ```
-This by default create a ssh key of 4096 bits in .ssh folder so then must be specified the name of the login user. If not is declared by defect use the user name defined in OS. 
-3. Add public key to host. For such task execute 
-   ```bash
-   cat <mi_ssh.pub>
-  ```
-  and copy the content into the host page to your user keys, in gitlab fing is 
-  https://gitlab.fing.edu.uy/, then config and "SSH keys". Paste the public key content
+This by default create a ssh key of 4096 bits in `.ssh` folder so then must be specified the name of the login user. If not is declared by defect use the user name defined in OS.
 
-4. Create a `config` file in  `~/.ssh` and introduce:
-   ```bash
-# GitLab.com
-Host gitlab.com
-    Preferredauthentications publickey
-    User <user_name>
-    Port 22
-    IdentityFile ~/.ssh/<my_ssh_privatekey>
-  ```
+3. Add public key to host. For such task execute 
+```bash
+   cat <mi_ssh.pub>
+```
+and copy the content into the host page to your user keys, for clusterUY platform is [ClusterUY page for professors and UY researchers](https://www.cluster.uy/registro/investigador_udelar/) then config and "SSH keys". Paste the public key content, then:
+
+4. (Optional step) Create a `config` file in  `~/.ssh` and introduce:
+  ```bash
+# Cluster uy
+Host clusteruy
+  HostName login.cluster.uy
+  User mvanzulli
+```
 
 5. Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and generated a new SSH key.
 ```bash
@@ -236,7 +236,7 @@ Host gitlab.com
   mvanzulli@cluster.uy -i ssh/nameKey
 ```
 
-Woalla you are in now!  Then a good practice is to create one backup private keys to avoid possibles headache of missing it in the future. 
+Woalla you are in now!  Then is highly recommended to create one backup private keys to avoid possibles headache of missing it in the future. 
 
 ---
 ## <span style="color:red">Execute a Matlab script
@@ -260,6 +260,11 @@ vim onsasExample_staticVonMisesTruss.sh
 /clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop -r "run('./onsasExample_staticVonMisesTruss.m');exit;"
 ```
 If the output file name is not described in `launch.sh`  the screen will be printed in a file inner the path where the launch is executed named: `slrum-JOBNUM.out`. 
+
+If only matlab is want to be executed inside of `interactivo-g` node run:
+```bash
+/clusteruy/apps/matlab/R2018b/bin/matlab -nodisplay -nosplash -nodesktop
+```
 ---
 ## <span style="color:red">Trasnfer data 
 Here is an example to transfer a .pdf from mi local PC to home clusterUY folder. For such task i should execute
